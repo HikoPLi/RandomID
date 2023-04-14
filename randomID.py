@@ -23,20 +23,20 @@ def check_id_exists(id, id_set):
     return exists
 
 
-def save_id_to_file(year, userinput, id, filename):
+def save_id_to_file(year, alternative, id, filename):
     try:
-        with open(filename, 'r') as f:
+        with open(f"{filename}.json", 'r') as f:
             data = json.load(f)
     except FileNotFoundError:
         data = []
-    axis = {f"{userinput}": year + id}
+    axis = {f"{alternative}": year + id}
     data.append(axis)
 
-    with open(filename, 'w') as f:
+    with open(f"{filename}.json", 'w') as f:
         json.dump(data, f, indent=4)
 
 
-def main():
+def random_id():
     os.chdir('ID')
     year = datetime.datetime.now().strftime("%Y")
 
@@ -44,7 +44,8 @@ def main():
         os.mkdir(year)
 
     os.chdir(year)
-    userinput = input("Please enter a key word: ")
+    keyword = input("Please enter a key word: ")
+    alternative = input("Please enter a alternative word: ")
     id_set = set()
 
     while True:
@@ -53,12 +54,7 @@ def main():
 
         if check_id_exists(new_id, id_set) == False:
             id_set.add(new_id)
-            save_id_to_file(year, userinput, new_id, 'ids.json')
+            save_id_to_file(year, alternative, new_id, keyword)
             break
 
     print(f"ID：{new_id}")
-
-
-if __name__ == "__main__":
-
-    main()
