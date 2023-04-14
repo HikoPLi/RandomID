@@ -8,6 +8,10 @@ def generate_random_id(length):
 
     chars = string.ascii_letters + string.digits + "^&*!=@?$"
     newid = ''.join(random.choice(chars) for _ in range(length))
+    # i = 0
+    # while i<length:
+    	# newdi = random.choic (chars)
+        # i = i + 1
     return newid
 
 
